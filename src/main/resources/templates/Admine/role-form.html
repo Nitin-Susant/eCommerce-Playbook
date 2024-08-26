@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+   th:replace="~{Admine/base::layout(~{::section})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add/Edit Role</title>
+  </head>
+  <body>
+    <section>
+      <h2 th:if="${editMode}">Edit Role</h2>
+      <h2 th:unless="${editMode}">Add Role</h2>
+      <form th:action="@{/admin/roles/save}" method="post">
+        <input type="hidden" th:field="${role.id}" />
+        <label>Name:</label>
+        <input type="text" th:field="${role.name}" required />
+        <button type="submit">Save</button>
+      </form>
+    </section>
+  </body>
+</html>

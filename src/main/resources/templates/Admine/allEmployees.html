@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{Admine/base::layout(~{::section})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Employee List</title>
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <a th:href="@{/admin/books/register}" class="btn btn-primary"
+          >Add Employee</a
+        >
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Employee ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Edit</th>
+              <th>Delete</th>
+              <!-- Add more table headers for other employee attributes -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="employee : ${employees}">
+              <td th:text="${employee.employeeId}"></td>
+              <td th:text="${employee.firstName}"></td>
+              <td th:text="${employee.lastName}"></td>
+              <td>
+                <a
+                  th:href="@{/editEmployee/{id}(id=${employee.employeeId})}"
+                  class="btn btn-info"
+                  >Edit</a
+                >
+              </td>
+              <td>
+                <a
+                  th:href="@{/deleteEmployee/{id}(id=${employee.employeeId})}"
+                  class="btn btn-danger"
+                  >Delete</a
+                >
+              </td>
+              <!-- Add more table cells for other employee attributes -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </body>
+</html>

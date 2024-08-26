@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{Public/base::layout(~{::section})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Bookstore - Welcome</title>
+    <!-- Add any necessary CSS stylesheets here -->
+  </head>
+
+  <body>
+    <!-- Header Section -->
+
+    <!-- Your main content goes here -->
+
+    <section>
+      <div class="container-fluid mt-4">
+        <p>
+          Discover a wide selection of books, explore different genres, and find
+          your next favorite read!
+        </p>
+
+        <div class="row">
+          <div class="col">
+            <h1>Book List</h1>
+
+            <div class="row">
+              <div class="col-md-3" th:each="book : ${books}">
+                <div class="card h-100 mb-3">
+                  <img th:src="${book.imageLink}" class="card-img-top" alt="Book Image" />
+                  <div class="card-body d-flex flex-column">
+                    <h5 class="card-title" th:text="${book.title}"></h5>
+                    <p class="card-text">
+                      Author: <span th:text="${book.author}"></span>
+                    </p>
+                    <p class="card-text">
+                      Price: <span th:text="${book.price}"></span>
+                    </p>
+                    <!-- Add more details if needed -->
+                    <div class="mt-auto">
+                      <a
+                        th:href="@{'/public/addtocart/' + ${book.id}}"
+                        class="btn btn-secondary"
+                      >
+                        Add to
+                      </a>
+                      <a
+                        th:href="@{'/public/booById/' + ${book.id}}"
+                        class="btn btn-secondary"
+                        >View Details</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a th:href="@{/public/booksBygener?gener=allbooks}" class="btn btn-primary">View All</a>
+            </div>
+
+            <h1>Recently added Books</h1>
+            <div class="row">
+              <div class="col-md-3" th:each="book : ${recentlyAddedBook}">
+                <div class="card h-100 mb-3">
+                  <img th:src="${book.imageLink}" class="card-img-top" alt="Book Image" />
+                  <div class="card-body d-flex flex-column">
+                    <h5 class="card-title" th:text="${book.title}"></h5>
+                    <p class="card-text">
+                      Author: <span th:text="${book.author}"></span>
+                    </p>
+                    <p class="card-text">
+                      Price: <span th:text="${book.price}"></span>
+                    </p>
+                    <!-- Add more details if needed -->
+                    <div class="mt-auto">
+                      <a href="#" class="btn btn-primary mr-2">Add to Cart</a>
+                      <a
+                        th:href="@{'/public/booById/' + ${book.id}}"
+                        class="btn btn-secondary"
+                        >View Details</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a th:href="@{/public/booksBygener?gener=recent}" class="btn btn-primary">View All</a>
+            </div>
+            <div>
+              <div th:each="entry : ${bookByGener}">
+                <h1 th:text="${entry.key}">Key</h1>
+
+                <div class="row">
+                  <div class="col-md-3" th:each="book : ${entry.value}">
+                    <div class="card h-100 mb-3">
+                      <img th:src="${book.imageLink}" class="card-img-top" alt="Book Image" />
+                      <div class="card-body d-flex flex-column">
+                        <h5 class="card-title" th:text="${book.title}"></h5>
+                        <p class="card-text">
+                          Author: <span th:text="${book.author}"></span>
+                        </p>
+                        <p class="card-text">
+                          Price: <span th:text="${book.price}"></span>
+                        </p>
+                        <!-- Add more details if needed -->
+                        <div class="mt-auto">
+                          <a href="#" class="btn btn-primary mr-2"
+                            >Add to Cart</a
+                          >
+                          <a
+                            th:href="@{'/public/booById/' + ${book.id}}"
+                            class="btn btn-secondary"
+                            >View Details</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <a th:href="@{'/public/booksBygener?gener='+ ${entry.key}}" class="btn btn-primary">View All</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

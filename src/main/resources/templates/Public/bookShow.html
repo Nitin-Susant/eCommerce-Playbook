@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <!-- Book Image Column -->
+        <div class="col-md-4">
+            <img th:src="${book.imageLink}" class="img-fluid rounded" alt="Book Image">
+        </div>
+        <!-- Book Details Column -->
+        <div class="col-md-8">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${book.title}"></h5>
+                    <p class="card-text">Author: <span th:text="${book.author}"></span></p>
+                    <p class="card-text">ISBN: <span th:text="${book.isbn}"></span></p>
+                    <p class="card-text">Price: <span th:text="${book.price}"></span></p>
+                    <p class="card-text">Description: <span th:text="${book.description}"></span></p>
+                    <p class="card-text">Page Number: <span th:text="${book.pageNumber}"></span></p>
+                    <p class="card-text">Genres:
+                      <span th:each="genre : ${book.genres}" class="badge bg-primary me-1" th:text="${genre}"></span>
+                  </p>
+                  
+                    <div class="mt-4">
+                        <h6>Additional Details</h6>
+                        <p th:text="'Language: ' + ${book.language}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

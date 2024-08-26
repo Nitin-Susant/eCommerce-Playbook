@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{Admine/base::layout(~{::section})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Employee Registration (Step 1: Email & Password)</title>
+  </head>
+  <body>
+    <section>
+      <h1>Employee Registration (Step 1: Email & Password)</h1>
+      <form
+        th:action="@{/admin/books/registerprocess}"
+        method="POST"
+        th:object="${employee}"
+      >
+        <h3>User Information</h3>
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          th:field="*{username}"
+          required
+        />
+        <br />
+        <label for="email">Email (desired company email format):</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          th:field="*{email}"
+          required
+        />
+        <br />
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          th:field="*{password}"
+          required
+        />
+        <br />
+        <button type="submit">Register Email & Password</button>
+      </form>
+    </section>
+  </body>
+</html>

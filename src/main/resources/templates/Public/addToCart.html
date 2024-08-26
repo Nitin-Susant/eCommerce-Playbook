@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{Public/base::layout(~{::section})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart Items</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section>
+      <div class="container mt-5">
+        <h2>Cart Items</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total Price</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Iterate over cart items and display details -->
+            <tr th:each="item : ${cartItems}">
+              <td th:text="${item.book.id}"></td>
+              <td th:text="${item.book.title}"></td>
+              <td th:text="${item.book.author}"></td>
+              <td th:text="${item.book.price}"></td>
+              <td th:text="${item.quantity}"></td>
+              <td th:text="${item.price}"></td>
+              <td>
+                <form th:action="@{'/public/deleteitem/'+${item.id}}" th:method="post">
+                  <button type="submit" class="btn btn-sm btn-danger">
+                    Delete
+                  </button>
+                </form>
+              </td>
+
+              <!-- Calculate total price for each item -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="col">
+            <h4>Total Amount: <span th:text="${totalAmount}"></span></h4>
+            <!-- Display total amount -->
+          </div>
+          <div class="col">
+            <a th:href="@{/public/checkout}" class="btn btn-primary"
+              >Checkout</a
+            >
+
+            <!-- Checkout button -->
+          </div>
+        </div>
+      </div>
+      <script>
+        function checkout() {
+          // Add logic for checkout process here
+          alert("Checkout clicked!");
+        }
+      </script>
+    </section>
+  </body>
+</html>

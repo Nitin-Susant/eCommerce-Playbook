@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Select Address</title>
+  </head>
+  <body>
+    <h1>Select Delivery Address</h1>
+    <form th:action="@{/public/saveorder}" method="get">
+      <div th:each="address : ${addresses}">
+        <p>
+          <input
+            type="checkbox"
+            name="addersId"
+            th:value="${address.id}"
+          />
+          <label>
+            [[${address.fullName}]]<br />
+            [[${address.addressLine1}]] [[${address.city}]],
+            [[${address.state}]], [[${address.postalCode}]],
+          </label>
+        </p>
+      </div>
+      <button type="submit">Submit Address</button>
+    </form>
+  </body>
+</html>
